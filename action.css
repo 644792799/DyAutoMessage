@@ -1,0 +1,47 @@
+.DyAutoMessageDiv{
+  position: relative;
+  zoom: 1;
+  margin: 0;
+  margin-top:10px;
+  padding: 0;
+  width: 320px;
+  height: 49px;
+  *background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  line-height: 20px;
+  overflow: hidden;
+}
+
+.DyAutoMessageTxt{
+  width: 250px;
+  height: 37px;
+  padding: 5px 13px;
+  *background: #fff;
+  border: 1px solid #ff921a;
+  border-right: none 0;
+  border-radius: 4px 0 0 4px;
+  line-height: 20px;
+  float: left;
+  overflow: hidden;
+}
+
+.chat-speak{
+  height: 142px !important;
+}
+
+.DyAutoMessageBtn{
+  background: #f14700;
+  display: block;
+  width: 43px;
+  height: 49px;
+  line-height: 49px;
+  border-radius: 0 4px 4px 0;
+  background: #f70 !important;
+  color: #fff;
+  font-size: 14px;
+  float: left;
+  text-align: center;
+  cursor: pointer;
+  border: 1px;
+}
