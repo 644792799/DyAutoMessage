@@ -1,6 +1,7 @@
 (function(){
   var $=function(id){return document.getElementById(id);}
   var msg = "";
+  var interval = 10;//unit minute
   var intervalID = "";
   var actions = {
     $ok:$('ok'),
@@ -27,12 +28,42 @@
       DyAutoMessageDiv.appendChild(ipt);
       DyAutoMessageDiv.appendChild(btn);
 
+      var hr = document.createElement("hr");
+      hr.setAttribute("class", "DyAutoMessageHr");
+
+      var DyAutoMessageConditionDiv = document.createElement("div");
+      DyAutoMessageConditionDiv.className = "DyAutoMessageConditionDiv";
+
+      var nlbl = document.createElement("label");
+      nlbl.setAttribute("for", "nipt");
+      nlbl.innerHTML = "每隔 ";
+
+      var unitlbl = document.createElement("label");
+      unitlbl.innerHTML = " 分 发送一次";
+
+      var nipt = document.createElement("input");
+      nipt.setAttribute("type", "number");
+      nipt.setAttribute("id", "nipt");
+      nipt.setAttribute("value", 10);
+
+      DyAutoMessageConditionDiv.appendChild(nlbl);
+      DyAutoMessageConditionDiv.appendChild(nipt);
+      DyAutoMessageConditionDiv.appendChild(unitlbl);
+
+      actions.$jssendmsg.appendChild(hr);
       actions.$jssendmsg.appendChild(DyAutoMessageDiv);
+      actions.$jssendmsg.appendChild(DyAutoMessageConditionDiv);
 
       btn.addEventListener('click', function(){
         console.log(ipt.value);
-        msg = ipt.value;
 
+        msg = ipt.value;
+        interval = parseFloat(nipt.value);
+
+        if(intervalID != ""){
+          actions.endSend();
+        }
+        actions.startSend();
       }, true);
     },
     findSendBtn: function(){
@@ -54,7 +85,7 @@
     },
     startSend: function(){
       //actions.send();
-      intervalID = window.setInterval(actions.send, 600000);
+      intervalID = window.setInterval(actions.send, interval*60*1000);
     },
     endSend: function(){
       window.clearInterval(intervalID);
@@ -64,7 +95,7 @@
       //   console.log(actions.$test);
       // }, true);
       actions.addHtml();
-      actions.startSend();
+      // actions.startSend();
     }
   }
   actions.init();

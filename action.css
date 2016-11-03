@@ -27,7 +27,7 @@
 }
 
 .chat-speak{
-  height: 142px !important;
+  height: 182px !important;
 }
 
 .DyAutoMessageBtn{
@@ -44,4 +44,20 @@
   text-align: center;
   cursor: pointer;
   border: 1px;
+}
+
+.DyAutoMessageConditionDiv{
+  margin: 4px auto 4px auto;
+  position: relative;
+  zoom: 1;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  height: 22px;
+  padding: 5px;
+}
+
+.DyAutoMessageHr{
+  position: relative;
+  top: 5px;
+  border-color: #fff;
 }
