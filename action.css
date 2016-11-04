@@ -8,9 +8,10 @@
   height: 49px;
   *background: #fff;
   border: 1px solid #ddd;
-  border-radius: 4px 0 0 4px;
+  border-radius: 4px 4px 4px 4px;
   line-height: 20px;
   overflow: hidden;
+  border-width: 0;
 }
 
 .DyAutoMessageTxt{
@@ -24,6 +25,10 @@
   line-height: 20px;
   float: left;
   overflow: hidden;
+}
+
+.DyAutoMessageTxt:focus{
+  border-right: 0;
 }
 
 .chat-speak{
@@ -51,13 +56,28 @@
   position: relative;
   zoom: 1;
   border: 1px solid #ddd;
-  border-radius: 4px 0 0 4px;
+  border-radius: 4px 4px 4px 4px;
   height: 22px;
   padding: 5px;
+}
+
+.DyAutoMessageConditionDiv .nipt{
+  border: 1px solid #eee;
+  border-radius: 2px;
 }
 
 .DyAutoMessageHr{
   position: relative;
   top: 5px;
   border-color: #fff;
+}
+
+.DyAutoMessageCountDownLbl{
+  margin-left: 3px;
+  font-weight: bold;
+  color:#f76300;
+}
+
+.room-ad-top, .room-ad-video-down, .chat-top-ad, .chat-notice, .room-ad-bottom{
+  display: none!important;
 }

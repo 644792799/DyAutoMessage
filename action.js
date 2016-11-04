@@ -3,6 +3,8 @@
   var msg = "";
   var interval = 10;//unit minute
   var intervalID = "";
+  var countDown = 0;
+  var intervalCountDownID = "";
   var actions = {
     $ok:$('ok'),
     $message:$('message'),
@@ -39,16 +41,24 @@
       nlbl.innerHTML = "每隔 ";
 
       var unitlbl = document.createElement("label");
-      unitlbl.innerHTML = " 分 发送一次";
+      unitlbl.innerHTML = " 分/次";
+
+      var countdownlbl = document.createElement("label");
+      countdownlbl.setAttribute("id", "DyAutoMessageCountDownLbl")
+      countdownlbl.setAttribute("class", "DyAutoMessageCountDownLbl")
+      //countdownlbl.innerHTML = "还剩:0秒";
+      actions.setcountdown(0, countdownlbl);
 
       var nipt = document.createElement("input");
       nipt.setAttribute("type", "number");
       nipt.setAttribute("id", "nipt");
+      nipt.setAttribute("class", "nipt");
       nipt.setAttribute("value", 10);
 
       DyAutoMessageConditionDiv.appendChild(nlbl);
       DyAutoMessageConditionDiv.appendChild(nipt);
       DyAutoMessageConditionDiv.appendChild(unitlbl);
+      DyAutoMessageConditionDiv.appendChild(countdownlbl);
 
       actions.$jssendmsg.appendChild(hr);
       actions.$jssendmsg.appendChild(DyAutoMessageDiv);
@@ -73,29 +83,42 @@
         console.log(nodes[i]);
         nodes[i].click();
       }
-      //console.log(nodes);
     },
     send : function(){
-      if(msg.Trim() != ""){
-        var dyDmTextAreaDom = document.getElementsByClassName("cs-textarea")[0];
-        msg = msg.endWith("~") ? msg.substring(0, msg.length -1) : msg + "~";
-        dyDmTextAreaDom.value = msg;
-        actions.findSendBtn();
+      countDown = interval*60;
+      var dyDmTextAreaDom = document.getElementsByClassName("cs-textarea")[0];
+      msg = msg.endWith("~") ? msg.substring(0, msg.length -1) : msg + "~";
+      dyDmTextAreaDom.value = msg;
+      actions.findSendBtn();
+    },
+    countdown: function(){
+      if(countDown >=0){
+        actions.setcountdown(countDown--);
+  		}
+    },
+    setcountdown: function(countDown, lbldom){
+      lbldom = lbldom || $('DyAutoMessageCountDownLbl');
+      if(countDown == 0){
+        lbldom.innerHTML = "已停止";
+      }else{
+        lbldom.innerHTML = "还剩:" + countDown-- + "秒";
       }
     },
     startSend: function(){
-      //actions.send();
-      intervalID = window.setInterval(actions.send, interval*60*1000);
+      if(msg.Trim() != ""){
+        countDown = interval*60;
+        intervalID = window.setInterval(actions.send, interval*60*1000);
+        intervalCountDownID = window.setInterval(actions.countdown, 1000);
+      }else{
+        actions.setcountdown(0);
+      }
     },
     endSend: function(){
       window.clearInterval(intervalID);
+      window.clearInterval(intervalCountDownID);
     },
     init: function(){
-      // actions.$ok.addEventListener('click', function(){
-      //   console.log(actions.$test);
-      // }, true);
       actions.addHtml();
-      // actions.startSend();
     }
   }
   actions.init();
